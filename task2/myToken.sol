@@ -12,7 +12,7 @@ approve 和 transferFrom：授权和代扣转账。
 使用 mapping 存储账户余额和授权信息。
 使用 event 定义 Transfer 和 Approval 事件。
 部署到sepolia 测试网，导入到自己的钱包
-
+地址:https://sepolia.etherscan.io/token/0x19a89a536e2c531dd265d0c64c6550c885fcd7fa
 */
 contract MyERC20 {
 
