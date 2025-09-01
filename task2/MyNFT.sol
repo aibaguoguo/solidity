@@ -10,6 +10,7 @@ contract MyNFT is ERC721URIStorage {
     constructor() ERC721("QuickQuick", "QKQK") {}
     /**
      * tokenURI:https://ipfs.io/ipfs/bafkreihfh2lv7bbte2he7bseb6xvuu45usud6b2avz4ah72xsluxtulmqm
+     * https://ipfs.io/ipfs/bafkreice63b3f2cgfub25ynocgewlssuefiulzdxb4yhb7rmgmi4xzuuhq
      */
     function awardItem(address player, string memory tokenURI) public returns (uint256) {
         uint256 tokenId = _nextTokenId++;
