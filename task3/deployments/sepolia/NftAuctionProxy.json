@@ -1,0 +1,14 @@
+{
+  "address": "0x59F815C9bcDfb76ccD11771d400Bd478Ba80C004",
+  "abi": [
+    "event Initialized(uint8)",
+    "function bid(uint256) payable",
+    "function endAuction(uint256)",
+    "function getAuctionInfo(uint256) view returns ((address,address,uint256,uint256,uint256,address,uint256,uint8))",
+    "function getCurrentAuctionId() view returns (uint256)",
+    "function initialize()",
+    "function startAuction(address,uint256,uint256)",
+    "function version() view returns (string)"
+  ],
+  "numDeployments": 1
+}
