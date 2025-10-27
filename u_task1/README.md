@@ -421,5 +421,10 @@ modifier tradingLimited(address from, uint256 amount) {
 
 ### hardhat 部署流程
 * 初始化环境 npx hardhat --init
+* 安装各种依赖 npm install --save-dev hardhat-deploy
+npm install --save-dev dotenv
+npm install --save-dev @openzeppelin/contracts
+npm install @openzeppelin/contracts@4.9.5 hardhat@2.19.0
+* 初始化本地账号环境 npx hardhat node
 * 运行scripts脚本 npx hardhat run scripts/deploy.ts --network localhost
 * 运行test npx hardhat test --network localhost

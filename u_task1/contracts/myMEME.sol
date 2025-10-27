@@ -4,10 +4,10 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
+// import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
+// import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
-contract SHIBAStyleToken is ERC20, Ownable {
+contract MyMEME is ERC20, Ownable {
     using SafeMath for uint256;
 
     //每日交易上限 总供应的1%
@@ -30,7 +30,7 @@ contract SHIBAStyleToken is ERC20, Ownable {
     address public communityAddress;
 
     //构造函数
-    constructor(address _liquidityAddress, address _communityAddress) ERC20("QuickToken", "QKQK") Ownable(msg.sender) {
+    constructor(address _liquidityAddress, address _communityAddress) ERC20("QuickToken", "QKQK") Ownable() {
         _mint(msg.sender, totalSupply());
         liquidityAddress = _liquidityAddress;
         communityAddress = _communityAddress;
