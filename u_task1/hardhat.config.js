@@ -2,6 +2,8 @@ require("@nomicfoundation/hardhat-toolbox");
 require("hardhat-deploy");
 require("@openzeppelin/hardhat-upgrades");
 require("dotenv").config();
+require("solidity-coverage"); 
+require("hardhat-gas-reporter");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -11,6 +13,15 @@ module.exports = {
     user1: 1,
     user2: 2,
     user3: 3,
+  },
+  coverage: {
+    // 在这里设置报告类型
+    reporters: [
+      "html",  // 生成HTML报告
+      "lcov",  // 生成LCOV报告（用于Coveralls）
+      "text",  // 在终端显示文本报告
+      "json"   // 生成JSON报告
+    ]
   },
   networks: {
     localhost: {
