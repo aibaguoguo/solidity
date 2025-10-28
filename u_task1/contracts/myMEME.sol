@@ -3,15 +3,15 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 // import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 // import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
 contract MyMEME is ERC20, Ownable {
-    using SafeMath for uint256;
+    using Math for uint256;
 
     //每日交易上限 总供应的1%
-    uint256 public maxDailyTransfer = totalSupply().div(100);
+    uint256 public maxDailyTransfer = totalSupply().mulDiv(1, 100);
     struct DailyTrans{
         uint256 dailySumAmount;//当日交易总额
         uint256 lastTransTime;//最后交易时间
@@ -30,7 +30,7 @@ contract MyMEME is ERC20, Ownable {
     address public communityAddress;
 
     //构造函数
-    constructor(address _liquidityAddress, address _communityAddress) ERC20("QuickToken", "QKQK") Ownable() {
+    constructor(address _liquidityAddress, address _communityAddress) ERC20("QuickToken", "QKQK") Ownable(msg.sender) {
         _mint(msg.sender, totalSupply());
         liquidityAddress = _liquidityAddress;
         communityAddress = _communityAddress;
@@ -53,7 +53,7 @@ contract MyMEME is ERC20, Ownable {
         if (!taxWhitelist[msg.sender]) {
             uint256 liquidityTax = calculateLiquidityTax(_amount);
             uint256 communityTax = calculateCommunityTax(_amount);
-            transferAmount = _amount.sub(liquidityTax).sub(communityTax);
+            transferAmount = _amount - liquidityTax - communityTax;
             super._transfer(msg.sender, liquidityAddress, liquidityTax);
             emit Transfer(msg.sender, liquidityAddress, liquidityTax);
             super._transfer(msg.sender, communityAddress, communityTax);
@@ -67,11 +67,11 @@ contract MyMEME is ERC20, Ownable {
 
     //流动性税计算
     function calculateLiquidityTax(uint256 _amount) internal pure returns (uint256) {
-        return _amount.mul(LIQUIDITY_TAX_RATE).div(100);
+        return _amount.mulDiv(LIQUIDITY_TAX_RATE, 100);
     }
     //社区运营税计算
     function calculateCommunityTax(uint256 _amount) internal pure returns (uint256) {
-        return _amount.mul(COMMUNITY_TAX_RATE).div(100);
+        return _amount.mulDiv(COMMUNITY_TAX_RATE, 100);
     }
 
     //精度
